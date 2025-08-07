@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>DNS Blocker - Escanear PDF</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f0f0; color: #000; }
+        .form-container {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #ccc;
+            margin: 60px auto;
+            max-width: 400px;
+        }
+        label { display: block; margin-top: 16px; text-align: left; }
+        input[type="file"] { margin-top: 8px; }
+        button { margin-top: 24px; width: 100%; padding: 12px; background: #007bff; color: #fff; border: none; border-radius: 6px; font-size: 1.1em; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .msg { margin-top: 16px; color: green; }
+        a { display: block; margin-top: 20px; color: #007bff; text-align: center; }
+        pre { background: #eee; padding: 16px; border-radius: 6px; text-align: left; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Escanear PDF</h2>
+        {% if msg %}
+            <div class="msg">{{ msg }}</div>
+        {% endif %}
+        <form method="post" enctype="multipart/form-data">
+            <label>Selecione o arquivo PDF:</label>
+            <input type="file" name="pdf_file" accept="application/pdf" required>
+            <button type="submit">Escanear e Adicionar à Lista</button>
+        </form>
+        <form method="post" style="margin-top:20px;">
+            <button type="submit" name="apagar_lista" style="background:#dc3545;">Apagar toda a lista.txt</button>
+        </form>
+        <a href="/">Voltar</a>
+        <h3>Resultado de escaneamentos feitos (lista.txt):</h3>
+        <pre>{{ conteudo_lista }}</pre>
+    </div>
+    <script>
+        document.querySelector('form').addEventListener('submit', function() {
+            const msgDiv = document.querySelector('.msg');
+            if (msgDiv) {
+                msgDiv.textContent = "Escaneando...";
+                msgDiv.style.color = "#007bff";
+            } else {
+                const div = document.createElement('div');
+                div.className = "msg";
+                div.textContent = "Escaneando...";
+                div.style.color = "#007bff";
+                document.querySelector('.form-container').insertBefore(div, document.querySelector('form'));
+            }
+        });
+    </script>
+</body>
+</html>

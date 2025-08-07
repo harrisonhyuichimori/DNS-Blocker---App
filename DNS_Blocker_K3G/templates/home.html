@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>DNS Blocker</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f0f0; color: #000; }
+        .main-flex {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 60px;
+        }
+        .btn-group {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #ccc;
+            margin-right: 40px;
+            min-width: 250px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            margin: 14px 0;
+            padding: 14px 0;
+            font-size: 1.1em;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            text-align: center;
+        }
+        .btn:hover { background: #0056b3; }
+        .table-container {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #ccc;
+            min-width: 400px;
+        }
+        table { margin: 0 auto; border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px 16px; color: #000;}
+        th { background: #007bff; color: #fff; }
+        .titulo-esquerda {
+            text-align: left;
+            margin: 30px 0 0 60px;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="titulo-esquerda">K3G Solutions - DNS Blocker</h1>
+    <div class="main-flex">
+        <div class="btn-group">
+            <h2>Menu</h2>
+            <a href="/consultar-clientes" class="btn">Consultar Clientes</a>
+            <a href="/cadastrar-cliente" class="btn">Cadastrar Cliente</a>
+            <a href="/excluir-cliente" class="btn">Excluir Cliente</a>
+            <a href="/escanear-pdf" class="btn">Escanear PDF</a>
+            <a href="/conectar-cliente" class="btn">Conectar a um Cliente</a>
+        </div>
+        <div class="table-container">
+            <h2>Lista de Clientes</h2>
+            {% if clientes %}
+            <table>
+                <tr>
+                    {% for col in colunas %}
+                        {% if col in ['id', 'cliente', 'host'] %}
+                            <th>{{ col }}</th>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                {% for cliente in clientes %}
+                <tr>
+                    {% for col in colunas %}
+                        {% if col in ['id', 'cliente', 'host'] %}
+                            <td>{{ cliente[colunas.index(col)] }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>Nenhum cliente encontrado.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

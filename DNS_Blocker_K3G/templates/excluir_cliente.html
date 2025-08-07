@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>DNS Blocker - Excluir Cliente</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f0f0; color: #000; }
+        .form-container {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #ccc;
+            margin: 60px auto;
+            max-width: 400px;
+        }
+        label { display: block; margin-top: 16px; text-align: left; }
+        input { width: 100%; padding: 8px; margin-top: 4px; border-radius: 4px; border: 1px solid #ccc; }
+        button { margin-top: 24px; width: 100%; padding: 12px; background: #dc3545; color: #fff; border: none; border-radius: 6px; font-size: 1.1em; cursor: pointer; }
+        button:hover { background: #a71d2a; }
+        .msg { margin-top: 16px; color: green; }
+        a { display: block; margin-top: 20px; color: #007bff; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Excluir Cliente</h2>
+        {% if msg %}
+            <div class="msg">{{ msg }}</div>
+        {% endif %}
+        <form method="post">
+            <label>ID do Cliente:</label>
+            <input type="number" name="id" required>
+            <button type="submit">Excluir</button>
+        </form>
+        <a href="/">Voltar</a>
+    </div>
+</body>
+</html>
