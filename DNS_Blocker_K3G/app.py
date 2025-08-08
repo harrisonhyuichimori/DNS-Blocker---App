@@ -238,10 +238,18 @@ def conectar_cliente():
                         disable_md5=False,
                         overwrite_file=True,
                     )
+                    # Usando essa função para corrigir compatibilidade com o cliente SpeedNetworks (ou ambientes CentOS 7)
+                    if client_id in [3]:
+                        connection.send_command_timing("unalias cp")
+                    # Comandos padrão em ambientes linux, haverá algumas exeções de outros hosts
+
+                    connection.send_command_timing("clear")
                     connection.send_command_timing(
                         "cp /etc/unbound/unbound.conf.d/sitesblock.conf /etc/unbound/unbound.conf.d/sitesblock.conf.old")
                     connection.send_command_timing(
                         "cp /tmp/sitesblock.conf /etc/unbound/unbound.conf.d/")
+                    connection.send_command_timing(
+                        "sudo unbound-checkconf")
                     connection.send_command_timing(
                         "systemctl restart unbound")
                 with open("netmiko_session.log", "r", encoding="utf-8") as f:
@@ -254,4 +262,3 @@ def conectar_cliente():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
- 
