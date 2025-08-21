@@ -1,32 +1,15 @@
-Linux ambiente-de-teste 6.1.0-37-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.140-1 (2025-05-22) x86_64
+Last login: Wed Aug 13 16:05:04 2025 from 131.108.136.134
 
-The programs included with the Debian GNU/Linux system are free software;
-the exact distribution terms for each program are described in the
-individual files in /usr/share/doc/*/copyright.
-
-Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
-permitted by applicable law.
-Last login: Fri Aug  8 17:22:17 2025 from 172.16.2.190
-
-suporte@ambiente-de-teste:~$ 
-
-suporte@ambiente-de-teste:~$ 
-
-suporte@ambiente-de-teste:~$ su
-
-Senha: 
-root@ambiente-de-teste:/home/suporte# 
-
-root@ambiente-de-teste:/home/suporte# export LANG=C
-
-root@ambiente-de-teste:/home/suporte# 
-
-root@ambiente-de-teste:/home/suporte# md5sum ///etc/unbound/unbound.conf.d/sitesblock.conf
-
-bf33dbe56eea8d2d59e6a6afc04c9f0c  ///etc/unbound/unbound.conf.d/sitesblock.conf
-root@ambiente-de-teste:/home/suporte# /bin/ls -l ///etc/unbound/unbound.conf.d/sitesblock.conf
-
--rw-r--r-- 1 root root 357 Aug  6 11:18 ///etc/unbound/unbound.conf.d/sitesblock.conf
-root@ambiente-de-teste:/home/suporte# 
-
-root@ambiente-de-teste:/home/suporte# exit
+[suporte@localhost ~]$ 
+[suporte@localhost ~]$ 
+[suporte@localhost ~]$ su
+Senha:
+[root@localhost suporte]# 
+[root@localhost suporte]# export LANG=C
+[root@localhost suporte]# 
+[root@localhost suporte]# md5sum ///etc/unbound/unbound.conf.d/sitesblock.conf
+dd0767e8af2d63dc631b722030e7838c  ///etc/unbound/unbound.conf.d/sitesblock.conf
+[root@localhost suporte]# /bin/ls -l ///etc/unbound/unbound.conf.d/sitesblock.conf
+-rw-r--r--. 1 root root 262858 Aug  8 16:32 ///etc/unbound/unbound.conf.d/sitesblock.conf
+[root@localhost suporte]# 
+[root@localhost suporte]# exit

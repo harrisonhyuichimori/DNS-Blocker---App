@@ -67,6 +67,10 @@
                         <input type="hidden" name="client_id" value="{{ request.form.get('client_id', '') }}">
                         <button type="submit" name="acao" value="bloquear_lista">Bloquear sites do lista.txt</button>
                     </form>
+                    <form method="post">
+                    <h3>Domínios bloqueados (listados):</h3>
+                    <pre>{{ conteudo_lista_1 }}</pre>
+                    </form>
                 </div>
             </div>
 

@@ -186,7 +186,7 @@ def conectar_cliente():
                     session_log="netmiko_session.log",
                 )
                 # Obter acesso root
-                if client_id in [8, 9, 12]:
+                if client_id in [8]:
                     root = connection.send_command_timing("sudo -i")
                 else:
                     root = connection.send_command_timing("su")
@@ -202,16 +202,23 @@ def conectar_cliente():
                 # Caminhos dos arquivos
                 local_file = "sites_bloqueados/cliente/sitesblock.conf"
                 remote_file = "/etc/unbound/unbound.conf.d/sitesblock.conf"
+                remote_file_duxnet = "/usr/local/etc/unbound/sitesblock.conf"
                 tmp_remote_file = "/tmp/sitesblock.conf"
 
+                if client_id in [8]:  # Diretório de download do sitesblock.conf para Duxnet
+                    remote_file_true = remote_file_duxnet
+                else:
+                    remote_file_true = remote_file
                 # Baixar o arquivo remoto para o local antes de editar
                 file_transfer(
                     connection,
-                    source_file=remote_file,
+                    source_file=remote_file_true,
                     dest_file=local_file,
                     file_system="/",
                     direction="get",
+                    disable_md5=False,
                     overwrite_file=True,
+
                 )
 
                 # Se o usuário escolheu bloquear manualmente
@@ -242,23 +249,28 @@ def conectar_cliente():
                     if client_id in [3]:
                         connection.send_command_timing("unalias cp")
                     # Comandos padrão em ambientes linux, haverá algumas exeções de outros hosts
-
-                    connection.send_command_timing("clear")
-                    connection.send_command_timing(
-                        "cp /etc/unbound/unbound.conf.d/sitesblock.conf /etc/unbound/unbound.conf.d/sitesblock.conf.old")
-                    connection.send_command_timing(
-                        "cp /tmp/sitesblock.conf /etc/unbound/unbound.conf.d/")
-                    connection.send_command_timing(
-                        "sudo unbound-checkconf")
-                    connection.send_command_timing(
-                        "systemctl restart unbound")
+                    else:
+                        connection.send_command_timing(
+                            "cp /etc/unbound/unbound.conf.d/sitesblock.conf /etc/unbound/unbound.conf.d/sitesblock.conf.old")
+                        connection.send_command_timing(
+                            "cp /tmp/sitesblock.conf /etc/unbound/unbound.conf.d/")
+                        connection.send_command_timing(
+                            "sudo unbound-checkconf")
+                        connection.send_command_timing(
+                            "systemctl restart unbound")
                 with open("netmiko_session.log", "r", encoding="utf-8") as f:
                     log = f.read()
                 connection.disconnect()
         except Exception as e:
             erro = f"Erro: {e}"
-    return render_template('conectar_cliente.html', msg=msg, erro=erro, log=log, bloqueio_realizado=bloqueio_realizado)
-
+    conteudo_lista_1 = ""
+    try:
+        with open('lista.txt', 'r', encoding='utf-8') as f:
+            conteudo_lista_1 = f.read()
+    except Exception as e:
+        conteudo_lista_1 = f"Erro ao ler lista.txt: {e}"
+    return render_template('conectar_cliente.html', msg=msg, erro=erro, log=log, bloqueio_realizado=bloqueio_realizado, conteudo_lista_1=conteudo_lista_1)
+    
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
