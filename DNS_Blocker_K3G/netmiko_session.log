@@ -1,0 +1,58 @@
+Linux DNS-RECURSIVO-II 6.1.0-38-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.147-1 (2025-08-02) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Mon Sep 15 09:01:52 2025 from 131.108.136.133
+
+suporte@DNS-RECURSIVO-II:~$ 
+
+suporte@DNS-RECURSIVO-II:~$ 
+
+suporte@DNS-RECURSIVO-II:~$ su
+
+Senha: 
+root@DNS-RECURSIVO-II:/home/suporte# 
+
+root@DNS-RECURSIVO-II:/home/suporte# export LANG=C
+
+root@DNS-RECURSIVO-II:/home/suporte# 
+
+root@DNS-RECURSIVO-II:/home/suporte# md5sum ///etc/unbound/unbound.conf.d/sitesblock.conf
+
+211ea234a725b1bd37ee7c2607c905f4  ///etc/unbound/unbound.conf.d/sitesblock.conf
+root@DNS-RECURSIVO-II:/home/suporte# /bin/ls -l ///etc/unbound/unbound.conf.d/sitesblock.conf
+
+-rw-r--r-- 1 root root 263018 Sep  9 10:16 ///etc/unbound/unbound.conf.d/sitesblock.conf
+root@DNS-RECURSIVO-II:/home/suporte# /bin/ls ///tmp/sitesblock.conf 2> /dev/null
+
+///tmp/sitesblock.conf
+root@DNS-RECURSIVO-II:/home/suporte# 
+
+root@DNS-RECURSIVO-II:/home/suporte# md5sum ///tmp/sitesblock.conf
+
+211ea234a725b1bd37ee7c2607c905f4  ///tmp/sitesblock.conf
+root@DNS-RECURSIVO-II:/home/suporte# /bin/df -k /
+
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/sda1       31861548 1853944  28363572   7% /
+root@DNS-RECURSIVO-II:/home/suporte# 
+
+root@DNS-RECURSIVO-II:/home/suporte# md5sum ///tmp/sitesblock.conf
+
+4edba20e9cfc2140f960b280d95d743f  ///tmp/sitesblock.conf
+root@DNS-RECURSIVO-II:/home/suporte# cp /etc/unbound/unbound.conf.d/sitesblock.conf /etc/unbound/unbound.conf.d/sitesblock.conf.old
+
+root@DNS-RECURSIVO-II:/home/suporte# cp /tmp/sitesblock.conf /etc/unbound/unbound.conf.d/
+
+root@DNS-RECURSIVO-II:/home/suporte# sudo unbound-checkconf
+
+unbound-checkconf: no errors in /etc/unbound/unbound.conf
+root@DNS-RECURSIVO-II:/home/suporte# systemctl restart unbound
+
+root@DNS-RECURSIVO-II:/home/suporte# 
+
+root@DNS-RECURSIVO-II:/home/suporte# exit
